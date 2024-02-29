@@ -1,4 +1,6 @@
 import "./main.css";
 import { home } from "pages";
 
-document.querySelector("#app").append(home());
+const app = document.querySelector("#app");
+app.dataset.route = "home";
+app.append(home());

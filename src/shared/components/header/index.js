@@ -22,7 +22,6 @@ export default function header() {
     "p-2"
   );
   const createdWithTextNode = document.createElement("span");
-  createdWithTextNode.classList.add("font-bold", "font-mono");
   createdWithTextNode.append(document.createTextNode("Created with"));
   header.append(createdWithTextNode, jsImg, viteImg);
   return header;
