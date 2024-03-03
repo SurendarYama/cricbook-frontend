@@ -1,3 +1,16 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.register-header {
+  @apply flex flex-col flex-1 p-2 items-center gap-y-2;
+}
+.login-header {
+  @apply flex flex-1 bg-purple-300 rounded-r-3xl p-2 justify-center;
+}
+.form-lable {
+  @apply text-purple-700 text-sm;
+}
+.form-input {
+  @apply w-full h-8 rounded-3xl outline outline-purple-700 placeholder:text-purple-400 border-0;
+}

@@ -4,7 +4,6 @@ export default function home() {
   const home = document.createElement("div");
   home.classList.add("flex", "flex-col", "w-screen", "min-h-full");
   const homeWrapper = document.createElement("div");
-  homeWrapper.setAttribute("id", "homeWrapper");
   homeWrapper.classList.add(
     "flex",
     "justify-center",
@@ -12,7 +11,6 @@ export default function home() {
     "h-screen"
   );
   const authWrapper = document.createElement("div");
-  authWrapper.setAttribute("id", "authWrapper");
   authWrapper.classList.add(
     "flex",
     "bg-white",
