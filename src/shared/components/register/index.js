@@ -9,7 +9,7 @@ export default function register() {
   form.classList.add("flex", "flex-col", "gap-y-5");
   const username = createFormInput({
     labelName: "Username",
-    inputType: "type",
+    inputType: "text",
     inputName: "username",
     inputPlaceholder: "SurendarYama",
   });
@@ -28,6 +28,20 @@ export default function register() {
     inputPlaceholder: "+91 9876543210",
   });
 
+  const password = createFormInput({
+    labelName: "Password",
+    inputType: "password",
+    inputName: "password",
+    inputPlaceholder: "Password",
+  });
+
+  const confirmPassword = createFormInput({
+    labelName: "Confirm Password",
+    inputType: "password",
+    inputName: "confirmPassword",
+    inputPlaceholder: "Password",
+  });
+
   const termsAndConditions = createAgree({
     href: "#",
     content: "Terms And Conditions",
@@ -44,11 +58,19 @@ export default function register() {
   });
 
   const button = document.createElement("button");
-  button.classList.add("register-button");
+  button.classList.add("auth-button");
   button.setAttribute("type", "submit");
   button.innerText = "Register";
 
-  form.append(username, email, phoneNumber, agree, button);
+  form.append(
+    username,
+    email,
+    phoneNumber,
+    password,
+    confirmPassword,
+    agree,
+    button
+  );
   form.addEventListener("submit", (e) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
