@@ -19,8 +19,8 @@ export default function home() {
     "rounded-3xl",
     "shadow-lg"
   );
-  homeWrapper.append(authWrapper);
   authWrapper.append(register(), login());
+  homeWrapper.append(authWrapper);
   home.append(header(), homeWrapper);
   return home;
 }

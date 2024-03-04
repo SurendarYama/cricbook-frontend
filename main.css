@@ -3,14 +3,17 @@
 @tailwind utilities;
 
 .register-header {
-  @apply flex flex-col flex-1 p-2 items-center gap-y-2;
+  @apply flex flex-col flex-1 p-5 items-center gap-y-2;
 }
 .login-header {
-  @apply flex flex-1 bg-purple-300 rounded-r-3xl p-2 justify-center;
+  @apply flex flex-1 bg-purple-300 rounded-r-3xl p-5 justify-center;
 }
 .form-lable {
   @apply text-purple-700 text-sm;
 }
 .form-input {
-  @apply w-full h-8 rounded-3xl outline outline-purple-700 placeholder:text-purple-400 border-0;
+  @apply w-full h-8 rounded-3xl outline outline-purple-700 placeholder:text-purple-300 border-0;
+}
+.register-button {
+  @apply bg-purple-900 p-2 text-slate-50 rounded-3xl hover:bg-slate-50 hover:text-purple-900  border-2 border-purple-900;
 }
