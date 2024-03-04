@@ -7,17 +7,17 @@ export default function login() {
   loginHeaderText.innerText = "Login";
   const form = document.createElement("form");
   form.classList.add("flex", "flex-col", "gap-y-5");
-  const usernameOrEmail = createFormInput({
-    labelName: "Username or Email Address",
+  const phoneeOrEmail = createFormInput({
+    labelName: "Phone Number or Email Address",
     inputType: "text",
     inputName: "userLoginId",
-    inputPlaceholder: "",
+    inputPlaceholder: "SurendarYama",
   });
   const password = createFormInput({
     labelName: "Password",
     inputType: "password",
     inputName: "password",
-    inputPlaceholder: "",
+    inputPlaceholder: "Password",
   });
   const forgotPassword = createEmptyLink({
     href: "#",
@@ -31,7 +31,12 @@ export default function login() {
   button.classList.add("auth-button");
   button.setAttribute("type", "submit");
   button.innerText = "Login";
-  form.append(usernameOrEmail, password, button);
+  form.append(phoneeOrEmail, password, button);
+  form.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const formData = new FormData(e.currentTarget);
+    console.log(formData);
+  });
   loginWrapper.append(loginHeaderText, form, forgotPassword, author);
   return loginWrapper;
 }
