@@ -12,15 +12,7 @@ export default function header() {
     src: viteLogo,
     alt: "Vite-Logo",
   });
-  header.classList.add(
-    "flex",
-    "w-screen",
-    "justify-center",
-    "items-center",
-    "gap-x-4",
-    "bg-purple-300",
-    "p-2"
-  );
+  header.classList.add("header");
   const createdWithTextNode = document.createElement("span");
   createdWithTextNode.append(document.createTextNode("Created with"));
   header.append(createdWithTextNode, jsImg, viteImg);
