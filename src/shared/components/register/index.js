@@ -1,4 +1,10 @@
-import { createFormInput, createFormCheckBox, createAgree } from "utils";
+import {
+  createFormInput,
+  createFormCheckBox,
+  createAgree,
+  createFormSelect,
+} from "utils";
+import { countryOptions } from "assets";
 
 export default function register() {
   const registerWrapper = document.createElement("div");
@@ -42,6 +48,12 @@ export default function register() {
     inputPlaceholder: "Password",
   });
 
+  const options = countryOptions.map((option, index) => {
+    index === 0 ? (option.selected = true) : (option.selected = false);
+    return option;
+  });
+  const country = createFormSelect({ labelName: "Country", options });
+
   const termsAndConditions = createAgree({
     href: "#",
     content: "Terms And Conditions",
@@ -68,6 +80,7 @@ export default function register() {
     phoneNumber,
     password,
     confirmPassword,
+    country,
     agree,
     button
   );
