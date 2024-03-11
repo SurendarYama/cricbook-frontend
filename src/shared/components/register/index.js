@@ -1,3 +1,4 @@
+import { joyReducer } from "surendar-yama-joy";
 import {
   createFormInput,
   createFormCheckBox,
@@ -5,6 +6,7 @@ import {
   createFormSelect,
 } from "utils";
 import { countryOptions } from "assets";
+import { initialState, reducerFn } from "./joy";
 
 export default function register() {
   const registerWrapper = document.createElement("div");
@@ -13,6 +15,9 @@ export default function register() {
   registerHeaderText.innerText = "Register";
   const form = document.createElement("form");
   form.classList.add("flex", "flex-col", "gap-y-5");
+
+  const [getState, dispatch] = joyReducer(initialState, reducerFn);
+
   const username = createFormInput({
     labelName: "Username",
     inputType: "text",
@@ -69,11 +74,21 @@ export default function register() {
     checked: true,
   });
 
-  const button = document.createElement("button");
-  button.classList.add("auth-button");
-  button.setAttribute("type", "submit");
-  button.innerText = "Register";
+  agree.addEventListener("click", function (e) {
+    if (this.firstChild.checked) {
+      button.disabled = false;
+    } else {
+      button.disabled = true;
+    }
+  });
 
+  const button = document.createElement("button");
+  button.classList.add("auth-button", "register-auth-button");
+  button.setAttribute("type", "submit");
+  getState().noEmptyFeilds
+    ? (button.disabled = false)
+    : (button.disabled = true);
+  button.innerText = "Register";
   form.append(
     username,
     email,
@@ -84,6 +99,17 @@ export default function register() {
     agree,
     button
   );
+
+  const formElements = form.elements;
+  for (let i = 0; i < formElements.length; i++) {
+    const input = formElements[i];
+    if (input.classList.contains("form-input")) {
+      input.addEventListener("change", (e) => {
+        dispatch;
+      });
+    }
+  }
+
   form.addEventListener("submit", (e) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
