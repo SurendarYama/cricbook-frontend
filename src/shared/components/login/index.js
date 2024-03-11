@@ -24,7 +24,7 @@ export default function login() {
     value: "Forgot Password",
   });
   const author = createEmptyLink({
-    href: "https://www.youtube.com/@surendar-yama",
+    href: "https://github.com/SurendarYama",
     value: "Author: Surendar Yama",
   });
   const button = document.createElement("button");

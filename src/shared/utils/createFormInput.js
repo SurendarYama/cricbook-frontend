@@ -7,6 +7,8 @@ export const createFormInput = (opts) => {
   const formFieldInput = document.createElement("input");
   formFieldInput.classList.add("form-input");
   formFieldInput.setAttribute("type", opts.inputType);
+  opts.minLenght && formFieldInput.setAttribute("minlength", opts.minLenght);
+  opts.maxLenght && formFieldInput.setAttribute("maxlength", opts.maxLenght);
   formFieldInput.setAttribute("required", true);
   formFieldInput.setAttribute("name", opts.inputName);
   formFieldInput.setAttribute("placeholder", opts.inputPlaceholder);

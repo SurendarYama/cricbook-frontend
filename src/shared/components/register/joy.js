@@ -1,9 +1,12 @@
 export const initialState = {
   username: {
     value: "",
+    minLength: 6,
+    maxLength: 26,
     error: {
       hasErr: true,
       touch: false,
+      message: "",
     },
   },
   email: {
@@ -11,6 +14,7 @@ export const initialState = {
     error: {
       hasErr: true,
       touch: false,
+      message: "",
     },
   },
   phoneNumber: {
@@ -18,20 +22,27 @@ export const initialState = {
     error: {
       hasErr: true,
       touch: false,
+      message: "",
     },
   },
   password: {
     value: "",
+    minLength: 6,
+    maxLength: 26,
     error: {
       hasErr: true,
       touch: false,
+      message: "",
     },
   },
   confirmPassword: {
     value: "",
+    minLength: 6,
+    maxLength: 26,
     error: {
       hasErr: true,
       touch: false,
+      message: "",
     },
   },
   noEmptyFeilds: false,
@@ -39,9 +50,13 @@ export const initialState = {
 export const reducerFn = (state, action) => {
   switch (action.type) {
     case "change_input":
-      return { ...state, count: state.count + 1 };
-    case "decrement":
-      return { ...state, count: state.count - 1 };
+      return {
+        ...state,
+        [action.payload.name]: {
+          ...state[action.payload.name],
+          ...action.payload.value,
+        },
+      };
     default:
       return state;
   }

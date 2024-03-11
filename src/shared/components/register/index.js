@@ -23,6 +23,8 @@ export default function register() {
     inputType: "text",
     inputName: "username",
     inputPlaceholder: "SurendarYama",
+    minLength: getState()["username"].minLength,
+    maxLength: getState()["username"].maxLength,
   });
 
   const email = createFormInput({
@@ -44,6 +46,8 @@ export default function register() {
     inputType: "password",
     inputName: "password",
     inputPlaceholder: "Password",
+    minLength: getState()["password"].minLength,
+    maxLength: getState()["password"].maxLength,
   });
 
   const confirmPassword = createFormInput({
@@ -51,6 +55,8 @@ export default function register() {
     inputType: "password",
     inputName: "confirmPassword",
     inputPlaceholder: "Password",
+    minLength: getState()["confirmPassword"].minLength,
+    maxLength: getState()["confirmPassword"].maxLength,
   });
 
   const options = countryOptions.map((option, index) => {
@@ -75,7 +81,7 @@ export default function register() {
   });
 
   agree.addEventListener("click", function (e) {
-    if (this.firstChild.checked) {
+    if (this.firstChild.checked && getState().noEmptyFeilds) {
       button.disabled = false;
     } else {
       button.disabled = true;
@@ -105,7 +111,24 @@ export default function register() {
     const input = formElements[i];
     if (input.classList.contains("form-input")) {
       input.addEventListener("change", (e) => {
-        dispatch;
+        const value = e.target.value;
+        const valueLength = value.length;
+        const inputValue = getState()[input.name];
+        if (
+          inputValue.minLength &&
+          inputValue.maxLength &&
+          (valueLength < inputValue.minLength ||
+            valueLength > inputValue.maxLength)
+        ) {
+          // dispatch({
+          //   type: "change_input",
+          //   payload: {
+          //     name: inputName,
+          //     value: { inputValue },
+          //   },
+          // });
+        } else {
+        }
       });
     }
   }
