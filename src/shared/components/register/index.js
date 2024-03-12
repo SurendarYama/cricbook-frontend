@@ -15,10 +15,6 @@ export default function register() {
   const form = document.createElement("form");
   form.classList.add("flex", "flex-col", "gap-y-5");
 
-  const state = {
-    noEmptyFeilds: false,
-  };
-
   const username = createFormInput({
     labelName: "Username",
     inputType: "text",
@@ -92,7 +88,7 @@ export default function register() {
   const button = document.createElement("button");
   button.classList.add("auth-button", "register-auth-button");
   button.setAttribute("type", "submit");
-  state.noEmptyFeilds ? (button.disabled = false) : (button.disabled = true);
+  button.disabled = true;
   button.innerText = "Register";
   form.append(
     username,
@@ -104,34 +100,6 @@ export default function register() {
     agree,
     button
   );
-
-  const formElements = form.elements;
-  for (let i = 0; i < formElements.length; i++) {
-    const input = formElements[i];
-    if (input.classList.contains("form-input")) {
-      input.addEventListener("change", (e) => {
-        const value = e.target.value;
-        const valueLength = value.length;
-        const inputName = input.name;
-        const inputValue = getState()[inputName];
-        let usernameError;
-        if (
-          inputValue.minLength &&
-          inputValue.maxLength &&
-          (valueLength < inputValue.minLength ||
-            valueLength > inputValue.maxLength)
-        ) {
-          usernameError = createFormError({
-            errorMessae: "username must be 6-26 characters length.",
-          });
-          usernameError[1]("block");
-          username.append(usernameError[0]);
-        } else {
-          usernameError[1]("block");
-        }
-      });
-    }
-  }
 
   form.addEventListener("submit", (e) => {
     e.preventDefault();
