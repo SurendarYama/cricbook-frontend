@@ -1,12 +1,11 @@
-import { joyReducer } from "surendar-yama-joy";
 import {
   createFormInput,
   createFormCheckBox,
   createAgree,
   createFormSelect,
+  createFormError,
 } from "utils";
 import { countryOptions } from "assets";
-import { initialState, reducerFn } from "./joy";
 
 export default function register() {
   const registerWrapper = document.createElement("div");
@@ -16,15 +15,17 @@ export default function register() {
   const form = document.createElement("form");
   form.classList.add("flex", "flex-col", "gap-y-5");
 
-  const [getState, dispatch] = joyReducer(initialState, reducerFn);
+  const state = {
+    noEmptyFeilds: false,
+  };
 
   const username = createFormInput({
     labelName: "Username",
     inputType: "text",
     inputName: "username",
     inputPlaceholder: "SurendarYama",
-    minLength: getState()["username"].minLength,
-    maxLength: getState()["username"].maxLength,
+    minLength: 6,
+    maxLength: 26,
   });
 
   const email = createFormInput({
@@ -46,8 +47,8 @@ export default function register() {
     inputType: "password",
     inputName: "password",
     inputPlaceholder: "Password",
-    minLength: getState()["password"].minLength,
-    maxLength: getState()["password"].maxLength,
+    minLength: 6,
+    maxLength: 26,
   });
 
   const confirmPassword = createFormInput({
@@ -55,8 +56,8 @@ export default function register() {
     inputType: "password",
     inputName: "confirmPassword",
     inputPlaceholder: "Password",
-    minLength: getState()["confirmPassword"].minLength,
-    maxLength: getState()["confirmPassword"].maxLength,
+    minLength: 6,
+    maxLength: 26,
   });
 
   const options = countryOptions.map((option, index) => {
@@ -91,9 +92,7 @@ export default function register() {
   const button = document.createElement("button");
   button.classList.add("auth-button", "register-auth-button");
   button.setAttribute("type", "submit");
-  getState().noEmptyFeilds
-    ? (button.disabled = false)
-    : (button.disabled = true);
+  state.noEmptyFeilds ? (button.disabled = false) : (button.disabled = true);
   button.innerText = "Register";
   form.append(
     username,
@@ -113,21 +112,22 @@ export default function register() {
       input.addEventListener("change", (e) => {
         const value = e.target.value;
         const valueLength = value.length;
-        const inputValue = getState()[input.name];
+        const inputName = input.name;
+        const inputValue = getState()[inputName];
+        let usernameError;
         if (
           inputValue.minLength &&
           inputValue.maxLength &&
           (valueLength < inputValue.minLength ||
             valueLength > inputValue.maxLength)
         ) {
-          // dispatch({
-          //   type: "change_input",
-          //   payload: {
-          //     name: inputName,
-          //     value: { inputValue },
-          //   },
-          // });
+          usernameError = createFormError({
+            errorMessae: "username must be 6-26 characters length.",
+          });
+          usernameError[1]("block");
+          username.append(usernameError[0]);
         } else {
+          usernameError[1]("block");
         }
       });
     }

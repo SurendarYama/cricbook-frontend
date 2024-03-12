@@ -4,3 +4,4 @@ export { createFormCheckBox } from "./createFormCheckBox";
 export { createAgree } from "./createAgreesLink";
 export { createEmptyLink } from "./createEmptyLink";
 export { createFormSelect } from "./createFormSelect";
+export { createFormError } from "./createFormError";
