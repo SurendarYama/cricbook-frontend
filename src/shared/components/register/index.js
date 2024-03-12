@@ -16,7 +16,7 @@ export default function register() {
   form.classList.add("flex", "flex-col", "gap-y-5");
 
   const username = createFormInput({
-    labelName: "Username",
+    labelName: "Username*",
     inputType: "text",
     inputName: "username",
     inputPlaceholder: "SurendarYama",
@@ -25,21 +25,21 @@ export default function register() {
   });
 
   const email = createFormInput({
-    labelName: "Email",
+    labelName: "Email*",
     inputType: "email",
     inputName: "email",
     inputPlaceholder: "surendaryama@gmail.com",
   });
 
   const phoneNumber = createFormInput({
-    labelName: "Phone Number",
+    labelName: "Phone Number*",
     inputType: "tel",
     inputName: "phoneNumber",
     inputPlaceholder: "9876543210",
   });
 
   const password = createFormInput({
-    labelName: "Password",
+    labelName: "Password*",
     inputType: "password",
     inputName: "password",
     inputPlaceholder: "Password",
@@ -48,7 +48,7 @@ export default function register() {
   });
 
   const confirmPassword = createFormInput({
-    labelName: "Confirm Password",
+    labelName: "Confirm Password*",
     inputType: "password",
     inputName: "confirmPassword",
     inputPlaceholder: "Password",
@@ -61,7 +61,7 @@ export default function register() {
     return option;
   });
   const country = createFormSelect({
-    labelName: "Country",
+    labelName: "Country*",
     options,
     name: "country",
   });
@@ -104,23 +104,52 @@ export default function register() {
 
   form.addEventListener("submit", (e) => {
     e.preventDefault();
-    // TODO:: Validation..
     const formData = new FormData(e.currentTarget);
+    const formDataUserName = formData.get("username");
+    const formDataEmail = formData.get("email");
+    const formDataPhoneNumber = formData.get("phoneNumber");
+    const formDataPassword = formData.get("password");
+    const formDataConfirmPassword = formData.get("confirmPassword");
+    const formDataCountry = formData.get("country");
+
     const [countryData] = countryOptions.filter(
-      (option) =>
-        option.name.toLowerCase() === formData.get("country").toLowerCase()
+      (option) => option.name.toLowerCase() === formDataCountry.toLowerCase()
     );
     delete countryData.selected;
-    const newUser = {
-      username: formData.get("username"),
-      email: formData.get("email"),
-      phone_number: formData.get("phoneNumber"),
-      country: countryData.name,
-      country_dail_code: countryData["dial_code"],
-      country_code: countryData.code,
-      password: formData.get("password"),
-    };
-    console.log(newUser);
+    if (
+      formDataUserName &&
+      formDataEmail &&
+      formDataPhoneNumber &&
+      formDataPassword &&
+      formDataConfirmPassword &&
+      formDataCountry
+    ) {
+      if (formDataConfirmPassword === formDataPassword) {
+        const newUser = {
+          username: formData.get("username"),
+          email: formData.get("email"),
+          phone_number: formData.get("phoneNumber"),
+          country: countryData.name,
+          country_dail_code: countryData["dial_code"],
+          country_code: countryData.code,
+          password: formData.get("password"),
+        };
+        console.log(newUser);
+      } else {
+        const error = createFormError({
+          errorMessage: "Confirm Password and Password is not matched.",
+          id: "passwordError",
+        });
+        confirmPassword.insertBefore(error, confirmPassword.firstChild);
+      }
+    } else {
+      const error = createFormError({
+        errorMessage: "All the feilds are required*.",
+        id: "emptyFeildsError",
+      });
+      registerWrapper.scrollTop = 0;
+      registerWrapper.insertBefore(error, registerWrapper.firstChild);
+    }
   });
   registerWrapper.append(registerHeaderText, form);
   return registerWrapper;

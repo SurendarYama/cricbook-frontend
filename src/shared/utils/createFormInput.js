@@ -9,7 +9,7 @@ export const createFormInput = (opts) => {
   formFieldInput.setAttribute("type", opts.inputType);
   opts.minLenght && formFieldInput.setAttribute("minlength", opts.minLenght);
   opts.maxLenght && formFieldInput.setAttribute("maxlength", opts.maxLenght);
-  formFieldInput.setAttribute("required", true);
+  formFieldInput.required = true;
   formFieldInput.setAttribute("name", opts.inputName);
   formFieldInput.setAttribute("placeholder", opts.inputPlaceholder);
   formField.append(formFieldLable, formFieldInput);
