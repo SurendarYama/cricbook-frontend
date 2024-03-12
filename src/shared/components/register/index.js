@@ -78,17 +78,14 @@ export default function register() {
   });
 
   agree.addEventListener("click", function (e) {
-    if (this.firstChild.checked && getState().noEmptyFeilds) {
-      button.disabled = false;
-    } else {
-      button.disabled = true;
-    }
+    this.firstChild.checked
+      ? (button.disabled = false)
+      : (button.disabled = true);
   });
 
   const button = document.createElement("button");
   button.classList.add("auth-button", "register-auth-button");
   button.setAttribute("type", "submit");
-  button.disabled = true;
   button.innerText = "Register";
   form.append(
     username,
