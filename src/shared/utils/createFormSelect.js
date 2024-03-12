@@ -6,6 +6,7 @@ export const createFormSelect = (opts) => {
   formFieldLable.innerText = opts.labelName;
   const formFieldSelect = document.createElement("select");
   formFieldSelect.classList.add("form-feild-select");
+  formFieldSelect.setAttribute("name", opts.name);
   const { options } = opts;
   for (let i = 0; i < options.length; i++) {
     const option = options[i];

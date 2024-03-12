@@ -35,7 +35,7 @@ export default function register() {
     labelName: "Phone Number",
     inputType: "tel",
     inputName: "phoneNumber",
-    inputPlaceholder: "+91 9876543210",
+    inputPlaceholder: "9876543210",
   });
 
   const password = createFormInput({
@@ -60,7 +60,11 @@ export default function register() {
     index === 0 ? (option.selected = true) : (option.selected = false);
     return option;
   });
-  const country = createFormSelect({ labelName: "Country", options });
+  const country = createFormSelect({
+    labelName: "Country",
+    options,
+    name: "country",
+  });
 
   const termsAndConditions = createAgree({
     href: "#",
@@ -100,8 +104,23 @@ export default function register() {
 
   form.addEventListener("submit", (e) => {
     e.preventDefault();
+    // TODO:: Validation..
     const formData = new FormData(e.currentTarget);
-    console.log(formData.get("username"));
+    const [countryData] = countryOptions.filter(
+      (option) =>
+        option.name.toLowerCase() === formData.get("country").toLowerCase()
+    );
+    delete countryData.selected;
+    const newUser = {
+      username: formData.get("username"),
+      email: formData.get("email"),
+      phone_number: formData.get("phoneNumber"),
+      country: countryData.name,
+      country_dail_code: countryData["dial_code"],
+      country_code: countryData.code,
+      password: formData.get("password"),
+    };
+    console.log(newUser);
   });
   registerWrapper.append(registerHeaderText, form);
   return registerWrapper;
