@@ -6,6 +6,7 @@ import {
   createFormError,
 } from "utils";
 import { countryOptions } from "assets";
+import { registerUser } from "services";
 
 export default function register() {
   const registerWrapper = document.createElement("div");
@@ -14,6 +15,7 @@ export default function register() {
   registerHeaderText.innerText = "Register";
   const form = document.createElement("form");
   form.classList.add("flex", "flex-col", "gap-y-5");
+  form.setAttribute("name", "reset");
 
   const username = createFormInput({
     labelName: "Username*",
@@ -102,7 +104,7 @@ export default function register() {
     button
   );
 
-  form.addEventListener("submit", (e) => {
+  form.addEventListener("submit", async (e) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
     const formDataUserName = formData.get("username");
@@ -126,15 +128,20 @@ export default function register() {
     ) {
       if (formDataConfirmPassword === formDataPassword) {
         const newUser = {
-          username: formData.get("username"),
-          email: formData.get("email"),
-          phone_number: formData.get("phoneNumber"),
+          username: formDataUserName,
+          email: formDataEmail,
+          phone_number: formDataPhoneNumber,
+          password: formDataPassword,
           country: countryData.name,
           country_dail_code: countryData["dial_code"],
           country_code: countryData.code,
-          password: formData.get("password"),
         };
-        console.log(newUser);
+        const response = await registerUser(
+          `${import.meta.env.CRICBOOK_APP_BASE_URL}auth/register`,
+          newUser
+        );
+        console.log(response);
+        form.reset();
       } else {
         const error = createFormError({
           errorMessage: "Confirm Password and Password is not matched.",
