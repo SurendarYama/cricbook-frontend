@@ -1,4 +1,5 @@
-import { createFormInput, createEmptyLink } from "utils";
+import { createFormInput, createEmptyLink, createFormError } from "utils";
+import { authUser } from "services";
 
 export default function login() {
   const loginWrapper = document.createElement("div");
@@ -8,13 +9,13 @@ export default function login() {
   const form = document.createElement("form");
   form.classList.add("flex", "flex-col", "gap-y-5");
   const phoneeOrEmail = createFormInput({
-    labelName: "Phone Number or Email Address",
+    labelName: "Phone Number or Email Address*",
     inputType: "text",
-    inputName: "userLoginId",
+    inputName: "loginId",
     inputPlaceholder: "SurendarYama",
   });
   const password = createFormInput({
-    labelName: "Password",
+    labelName: "Password*",
     inputType: "password",
     inputName: "password",
     inputPlaceholder: "Password",
@@ -32,10 +33,34 @@ export default function login() {
   button.setAttribute("type", "submit");
   button.innerText = "Login";
   form.append(phoneeOrEmail, password, button);
-  form.addEventListener("submit", (e) => {
+  form.addEventListener("submit", async (e) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
-    console.log(formData);
+    const userIdformData = formData.get("loginId");
+    const userPasswordformData = formData.get("password");
+    const emptyFeildsError = document.getElementById("emptyFeildsError");
+    emptyFeildsError && emptyFeildsError.remove();
+
+    if (userIdformData && userPasswordformData) {
+      const loginId = userIdformData.includes("@")
+        ? userIdformData
+        : parseInt(userIdformData);
+      const user = {
+        loginId,
+        password: userPasswordformData,
+      };
+      const response = await authUser(
+        `${import.meta.env.CRICBOOK_APP_BASE_URL}auth/login`,
+        user
+      );
+      console.log(response);
+    } else {
+      const error = createFormError({
+        errorMessage: "All the feilds are required*.",
+        id: "emptyFeildsError",
+      });
+      loginWrapper.insertBefore(error, loginWrapper.firstChild);
+    }
   });
   loginWrapper.append(loginHeaderText, form, forgotPassword, author);
   return loginWrapper;

@@ -1,4 +1,4 @@
-export const registerUser = async (url, data) => {
+export const authUser = async (url, data) => {
   const response = await fetch(url, {
     method: "POST", // *GET, POST, PUT, DELETE, etc.
     headers: {

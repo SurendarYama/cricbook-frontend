@@ -7,7 +7,7 @@ import {
   createDialog,
 } from "utils";
 import { countryOptions } from "assets";
-import { registerUser } from "services";
+import { authUser } from "services";
 
 export default function register() {
   const registerWrapper = document.createElement("div");
@@ -149,7 +149,7 @@ export default function register() {
           country_dail_code: countryData["dial_code"],
           country_code: countryData.code,
         };
-        const response = await registerUser(
+        const response = await authUser(
           `${import.meta.env.CRICBOOK_APP_BASE_URL}auth/register`,
           newUser
         );
