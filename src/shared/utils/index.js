@@ -5,3 +5,4 @@ export { createAgree } from "./createAgreesLink";
 export { createEmptyLink } from "./createEmptyLink";
 export { createFormSelect } from "./createFormSelect";
 export { createFormError } from "./createFormError";
+export { createDialog } from "./createDialog";

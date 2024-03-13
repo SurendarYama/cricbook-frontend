@@ -4,6 +4,7 @@ import {
   createAgree,
   createFormSelect,
   createFormError,
+  createDialog,
 } from "utils";
 import { countryOptions } from "assets";
 import { registerUser } from "services";
@@ -90,7 +91,7 @@ export default function register() {
   });
 
   const button = document.createElement("button");
-  button.classList.add("auth-button", "register-auth-button");
+  button.classList.add("auth-button");
   button.setAttribute("type", "submit");
   button.innerText = "Register";
   form.append(
@@ -118,6 +119,18 @@ export default function register() {
       (option) => option.name.toLowerCase() === formDataCountry.toLowerCase()
     );
     delete countryData.selected;
+
+    const passwordErr = document.getElementById("passwordError");
+    const emptyFeildsError = document.getElementById("emptyFeildsError");
+    const usernameFeildError = document.getElementById("usernameError");
+    const emailFeildError = document.getElementById("emailError");
+    const phoneNumberFeildError = document.getElementById("phoneNumberError");
+    passwordErr && passwordErr.remove();
+    emptyFeildsError && emptyFeildsError.remove();
+    usernameFeildError && usernameFeildError.remove();
+    emailFeildError && emailFeildError.remove();
+    phoneNumberFeildError && phoneNumberFeildError.remove();
+
     if (
       formDataUserName &&
       formDataEmail &&
@@ -140,8 +153,42 @@ export default function register() {
           `${import.meta.env.CRICBOOK_APP_BASE_URL}auth/register`,
           newUser
         );
-        console.log(response);
-        form.reset();
+
+        if (response.hasError) {
+          if (response.feildName === "username") {
+            const error = createFormError({
+              errorMessage: response.message,
+              id: "usernameError",
+            });
+            username.insertBefore(error, username.firstChild);
+            registerWrapper.scrollTop = 0;
+          }
+
+          if (response.feildName === "email") {
+            const error = createFormError({
+              errorMessage: response.message,
+              id: "emailError",
+            });
+            email.insertBefore(error, email.firstChild);
+            registerWrapper.scrollTop = 0;
+          }
+          if (response.feildName === "phoneNumber") {
+            const error = createFormError({
+              errorMessage: response.message,
+              id: "phoneNumberError",
+            });
+            phoneNumber.insertBefore(error, phoneNumber.firstChild);
+            registerWrapper.scrollTop = 0;
+          }
+        } else {
+          form.reset();
+          const registerDialog = createDialog({
+            closeButtonContent: "Close",
+            content: response.message,
+          });
+          registerWrapper.append(registerDialog);
+          registerDialog.showModal();
+        }
       } else {
         const error = createFormError({
           errorMessage: "Confirm Password and Password is not matched.",
