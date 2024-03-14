@@ -1,5 +1,7 @@
 import "./main.css";
-import { home } from "pages";
+import { home, dashboard } from "pages";
 
 const app = document.querySelector("#app");
-app.append(home());
+
+const user = localStorage.getItem("user");
+user ? app.append(dashboard()) : app.append(home());

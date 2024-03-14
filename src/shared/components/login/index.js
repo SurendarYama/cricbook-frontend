@@ -1,5 +1,6 @@
 import { createFormInput, createEmptyLink, createFormError } from "utils";
 import { authUser } from "services";
+import { dashboard } from "pages";
 
 export default function login() {
   const loginWrapper = document.createElement("div");
@@ -7,6 +8,7 @@ export default function login() {
   const loginHeaderText = document.createElement("div");
   loginHeaderText.innerText = "Login";
   const form = document.createElement("form");
+  form.setAttribute("name", "reset");
   form.classList.add("flex", "flex-col", "gap-y-5");
   const phoneeOrEmail = createFormInput({
     labelName: "Phone Number or Email Address*",
@@ -39,7 +41,9 @@ export default function login() {
     const userIdformData = formData.get("loginId");
     const userPasswordformData = formData.get("password");
     const emptyFeildsError = document.getElementById("emptyFeildsError");
+    const serverError = document.getElementById("serverError");
     emptyFeildsError && emptyFeildsError.remove();
+    serverError && serverError.remove();
 
     if (userIdformData && userPasswordformData) {
       const loginId = userIdformData.includes("@")
@@ -54,6 +58,19 @@ export default function login() {
         user
       );
       console.log(response);
+
+      if (response.hasError) {
+        const serverError = createFormError({
+          errorMessage: response.message,
+          id: "serverError",
+        });
+        loginWrapper.insertBefore(serverError, loginWrapper.firstChild);
+      } else {
+        localStorage.setItem("user", response["userId"]);
+        form.reset();
+        document.getElementById("homePage").remove();
+        document.getElementById("app").append(dashboard());
+      }
     } else {
       const error = createFormError({
         errorMessage: "All the feilds are required*.",
