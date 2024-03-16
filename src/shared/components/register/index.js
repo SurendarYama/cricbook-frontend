@@ -60,7 +60,9 @@ export default function register() {
   });
 
   const options = countryOptions.map((option, index) => {
-    index === 0 ? (option.selected = true) : (option.selected = false);
+    option.name === "India"
+      ? (option.selected = true)
+      : (option.selected = false);
     return option;
   });
   const country = createFormSelect({
