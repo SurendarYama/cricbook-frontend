@@ -11,8 +11,6 @@ export default function sidebar() {
     "min-h-screen",
     "bg-slate-100"
   );
-
   sidebar.append(menu(), sidebarSetting());
-
   return sidebar;
 }

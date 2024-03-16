@@ -57,8 +57,6 @@ export default function login() {
         `${import.meta.env.CRICBOOK_APP_BASE_URL}auth/login`,
         user
       );
-      console.log(response);
-
       if (response.hasError) {
         const serverError = createFormError({
           errorMessage: response.message,

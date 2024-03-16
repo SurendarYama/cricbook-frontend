@@ -1,4 +1,4 @@
-import { home } from "pages";
+import { logout } from "utils";
 
 export default function sidebarSetting() {
   const sidebarSetting = document.createElement("div");
@@ -20,10 +20,6 @@ export default function sidebarSetting() {
     "hover:text-pink-600"
   );
   sidebarSetting.append(settings);
-  sidebarSetting.addEventListener("click", function (e) {
-    localStorage.removeItem("user");
-    document.getElementById("dashboardPage").remove();
-    document.getElementById("app").append(home());
-  });
+  sidebarSetting.addEventListener("click", () => logout());
   return sidebarSetting;
 }

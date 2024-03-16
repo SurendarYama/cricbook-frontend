@@ -6,3 +6,4 @@ export { createEmptyLink } from "./createEmptyLink";
 export { createFormSelect } from "./createFormSelect";
 export { createFormError } from "./createFormError";
 export { createDialog } from "./createDialog";
+export { logout } from "./logout";

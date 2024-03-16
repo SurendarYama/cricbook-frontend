@@ -1,11 +1,10 @@
 import { createImageTag } from "utils";
-import { avatarImg } from "assets";
-export default function avatar() {
+
+export default function avatar(src, alt) {
   const avatar = createImageTag({
-    src: avatarImg,
-    alt: "avatar_image",
+    src,
+    alt,
     avatar: true,
   });
-
   return avatar;
 }

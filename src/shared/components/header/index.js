@@ -1,20 +1,12 @@
-import { javascriptLogo } from "assets";
-import viteLogo from "/vite.svg";
-import { createImageTag } from "utils";
+import { avatar } from "components";
+import { logoImg } from "assets";
 
 export default function header() {
   const header = document.createElement("header");
-  const jsImg = createImageTag({
-    src: javascriptLogo,
-    alt: "JavaScript-Logo",
-  });
-  const viteImg = createImageTag({
-    src: viteLogo,
-    alt: "Vite-Logo",
-  });
+  const logo = avatar(logoImg, "logo_image");
   header.classList.add("header");
   const createdWithTextNode = document.createElement("span");
-  createdWithTextNode.append(document.createTextNode("Created with"));
-  header.append(createdWithTextNode, jsImg, viteImg);
+  createdWithTextNode.append(document.createTextNode("CricBook"));
+  header.append(logo, createdWithTextNode);
   return header;
 }
