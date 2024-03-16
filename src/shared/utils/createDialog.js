@@ -1,6 +1,6 @@
 export const createDialog = (opts) => {
   const dialog = document.createElement("dialog");
-  dialog.classList.add("p-12", "space-y-6", "border-4", "border-purple-600");
+  dialog.classList.add("p-12", "space-y-6");
   const dialogCloseButton = document.createElement("button");
   dialogCloseButton.classList.add("dialog-button");
   dialogCloseButton.innerText = opts.closeButtonContent;
