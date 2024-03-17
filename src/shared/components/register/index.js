@@ -145,11 +145,11 @@ export default function register() {
         const newUser = {
           username: formDataUserName,
           email: formDataEmail,
-          phone_number: formDataPhoneNumber,
+          phoneNumber: formDataPhoneNumber,
           password: formDataPassword,
           country: countryData.name,
-          country_dail_code: countryData["dial_code"],
-          country_code: countryData.code,
+          countryDailCode: countryData["dial_code"],
+          countryCode: countryData.code,
         };
         const response = await authUser(
           `${import.meta.env.CRICBOOK_APP_BASE_URL}auth/register`,
