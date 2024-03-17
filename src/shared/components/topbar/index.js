@@ -17,7 +17,6 @@ export default function topbar() {
   const userId = localStorage.getItem("user");
   getUserById(`${import.meta.env.CRICBOOK_APP_BASE_URL}user/${userId}`).then(
     (data) => {
-      debugger;
       const avatarNode = avatar(avatarImg, "avatar_image");
       avatarNode.classList.remove("w-12", "h-12");
       avatarNode.classList.add("w-8", "h-8");

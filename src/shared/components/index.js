@@ -8,3 +8,4 @@ export { default as avatar } from "./avatar";
 export { default as main } from "./main";
 export { default as contextMenu } from "./context-menu";
 export { default as topbar } from "./topbar";
+export { default as logo } from "./logo";
