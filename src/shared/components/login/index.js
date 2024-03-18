@@ -46,6 +46,7 @@ export default function login() {
     serverError && serverError.remove();
 
     if (userIdformData && userPasswordformData) {
+      button.innerHTML = "Loading...";
       const loginId = userIdformData.includes("@")
         ? userIdformData
         : parseInt(userIdformData);
@@ -64,6 +65,7 @@ export default function login() {
         });
         loginWrapper.insertBefore(serverError, loginWrapper.firstChild);
       } else {
+        button.innerHTML = "Login";
         localStorage.setItem("user", response["userId"]);
         form.reset();
         document.getElementById("homePage").remove();

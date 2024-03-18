@@ -95,7 +95,7 @@ export default function register() {
   const button = document.createElement("button");
   button.classList.add("auth-button");
   button.setAttribute("type", "submit");
-  button.innerText = "Register";
+  button.innerHTML = "Register";
   form.append(
     username,
     email,
@@ -142,6 +142,8 @@ export default function register() {
       formDataCountry
     ) {
       if (formDataConfirmPassword === formDataPassword) {
+        button.innerHTML = "Loading...";
+
         const newUser = {
           username: formDataUserName,
           email: formDataEmail,
@@ -184,6 +186,7 @@ export default function register() {
           }
         } else {
           form.reset();
+          button.innerHTML = "Register";
           const registerDialog = createDialog({
             closeButtonContent: "Close",
             content: response.message,

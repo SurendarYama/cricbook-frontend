@@ -5,12 +5,6 @@ export default function avatar(src, alt) {
     src,
     alt,
   });
-  avatar.classList.add(
-    "rounded",
-    "rounded-full",
-    "w-12",
-    "h-12",
-    "cursor-pointer"
-  );
+  avatar.classList.add("rounded", "rounded-full", "size-12", "cursor-pointer");
   return avatar;
 }
