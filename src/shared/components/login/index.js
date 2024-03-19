@@ -1,6 +1,7 @@
 import { createFormInput, createEmptyLink, createFormError } from "utils";
 import { authUser } from "services";
 import { dashboard } from "pages";
+import { spinner } from "components";
 
 export default function login() {
   const loginWrapper = document.createElement("div");
@@ -44,9 +45,8 @@ export default function login() {
     const serverError = document.getElementById("serverError");
     emptyFeildsError && emptyFeildsError.remove();
     serverError && serverError.remove();
-
     if (userIdformData && userPasswordformData) {
-      button.innerHTML = "Loading...";
+      button.innerHTML = spinner().innerHTML;
       const loginId = userIdformData.includes("@")
         ? userIdformData
         : parseInt(userIdformData);
@@ -59,6 +59,7 @@ export default function login() {
         user
       );
       if (response.hasError) {
+        button.innerHTML = "Login";
         const serverError = createFormError({
           errorMessage: response.message,
           id: "serverError",

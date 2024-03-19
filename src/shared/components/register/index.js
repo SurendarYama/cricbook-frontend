@@ -8,6 +8,7 @@ import {
 } from "utils";
 import { countryOptions } from "assets";
 import { authUser } from "services";
+import { spinner } from "components";
 
 export default function register() {
   const registerWrapper = document.createElement("div");
@@ -142,7 +143,7 @@ export default function register() {
       formDataCountry
     ) {
       if (formDataConfirmPassword === formDataPassword) {
-        button.innerHTML = "Loading...";
+        button.innerHTML = button.innerHTML = spinner().innerHTML;
 
         const newUser = {
           username: formDataUserName,
@@ -159,6 +160,7 @@ export default function register() {
         );
 
         if (response.hasError) {
+          button.innerHTML = "Register";
           if (response.feildName === "username") {
             const error = createFormError({
               errorMessage: response.message,

@@ -33,3 +33,7 @@
 .dialog-button {
   @apply bg-purple-900 w-16 p-2 text-slate-50 rounded-xl hover:bg-slate-50 hover:text-purple-900 shadow-2xl;
 }
+
+.spinner-icon {
+  @apply items-center justify-center animate-spin;
+}

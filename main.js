@@ -8,4 +8,5 @@ socket.on("connect", () => console.log("IO COnnected..."));
 
 const app = document.querySelector("#app");
 const user = localStorage.getItem("user");
+
 user ? app.append(dashboard()) : app.append(home());
