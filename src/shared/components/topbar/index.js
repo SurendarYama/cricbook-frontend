@@ -1,8 +1,7 @@
 import { avatar } from "components";
 import { avatarImg } from "assets";
 import { getUserById } from "services";
-
-import { logout } from "utils";
+import { createUserDetail } from "utils";
 
 export default function topbar() {
   const topbarWrapper = document.createElement("div");
@@ -10,7 +9,7 @@ export default function topbar() {
     "flex",
     "w-full",
     "h-10",
-    "space-x-2",
+    "space-x-10",
     "justify-end",
     "items-center"
   );
@@ -20,14 +19,26 @@ export default function topbar() {
       const avatarNode = avatar(avatarImg, "avatar_image");
       avatarNode.classList.remove("w-12", "h-12");
       avatarNode.classList.add("w-8", "h-8");
-      const { username } = data.user;
-      const userNode = document.createElement("span");
-      userNode.classList.add("font-bold", "text-purple-600", "mt-1");
-      userNode.innerText = username.charAt(0).toUpperCase() + username.slice(1);
+      const { username, email, phoneNumber, countryDailCode } = data.user;
+      const usernameNode = createUserDetail({
+        icon: "fa-user",
+        feildName: username,
+      });
+      const emailNode = createUserDetail({
+        icon: "fa-envelope",
+        feildName: email,
+      });
+      const phoneNumberNode = createUserDetail({
+        icon: "fa-phone",
+        feildName: `${countryDailCode}  ${phoneNumber}`,
+      });
 
-      const userIcon = document.createElement("i");
-      userIcon.classList.add("fa-solid", "fa-user", "text-purple-600");
-      topbarWrapper.append(userIcon, userNode, avatarNode);
+      topbarWrapper.append(
+        phoneNumberNode,
+        emailNode,
+        usernameNode,
+        avatarNode
+      );
     }
   );
   return topbarWrapper;
