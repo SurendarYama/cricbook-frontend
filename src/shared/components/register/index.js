@@ -87,16 +87,21 @@ export default function register() {
     checked: true,
   });
 
-  agree.addEventListener("click", function (e) {
-    this.firstChild.checked
-      ? (button.disabled = false)
-      : (button.disabled = true);
-  });
-
   const button = document.createElement("button");
   button.classList.add("auth-button");
   button.setAttribute("type", "submit");
   button.innerHTML = "Register";
+
+  agree.addEventListener("click", function (e) {
+    debugger;
+    if (this.firstChild.checked) {
+      button.disabled = false;
+      button.classList.remove("opacity-75", "cursor-not-allowed");
+    } else {
+      button.disabled = true;
+      button.classList.add("opacity-75", "cursor-not-allowed");
+    }
+  });
   form.append(
     username,
     email,
@@ -140,7 +145,8 @@ export default function register() {
       formDataPhoneNumber &&
       formDataPassword &&
       formDataConfirmPassword &&
-      formDataCountry
+      formDataCountry &&
+      agree.checked
     ) {
       if (formDataConfirmPassword === formDataPassword) {
         button.innerHTML = button.innerHTML = spinner().innerHTML;

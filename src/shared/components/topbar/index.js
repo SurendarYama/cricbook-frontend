@@ -1,7 +1,7 @@
 import { avatar } from "components";
 import { avatarImg } from "assets";
 import { getUserById } from "services";
-import { createUserDetail } from "utils";
+import { createUserDetail, createDialog } from "utils";
 
 export default function topbar() {
   const topbarWrapper = document.createElement("div");
@@ -33,7 +33,22 @@ export default function topbar() {
         feildName: `${countryDailCode}  ${phoneNumber}`,
       });
 
+      const settings = createUserDetail({
+        icon: "fa-gear",
+        feildName: `Settings`,
+      });
+      settings.classList.add("cursor-pointer");
+      settings.addEventListener("click", function (e) {
+        const editProfileDialog = createDialog({
+          closeButtonContent: "Close",
+          content: "Settings",
+        });
+        document.getElementById("dashboardPage").append(editProfileDialog);
+        editProfileDialog.classList.add("size-96", "top-[-160px]");
+        editProfileDialog.showModal();
+      });
       topbarWrapper.append(
+        settings,
         phoneNumberNode,
         emailNode,
         usernameNode,

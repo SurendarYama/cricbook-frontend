@@ -8,7 +8,7 @@ export const createDialog = (opts) => {
   dialogCloseButton.addEventListener("click", (e) => dialog.close());
   const dialogContent = document.createElement("p");
   dialogContent.classList.add("text-green-600");
-  dialogContent.innerText = opts.content;
+  dialogContent.innerHTML = opts.content;
   dialog.append(dialogContent, dialogCloseButton);
   return dialog;
 };
