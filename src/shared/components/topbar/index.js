@@ -2,7 +2,6 @@ import { avatar } from "components";
 import { avatarImg } from "assets";
 import { getUserById } from "services";
 import { createUserDetail, createDialog } from "utils";
-
 export default function topbar() {
   const topbarWrapper = document.createElement("div");
   topbarWrapper.classList.add(
@@ -44,7 +43,7 @@ export default function topbar() {
           content: "Settings",
         });
         document.getElementById("dashboardPage").append(editProfileDialog);
-        editProfileDialog.classList.add("size-96", "top-[-160px]");
+        editProfileDialog.classList.add("w-9/12", "h-full");
         editProfileDialog.showModal();
       });
       topbarWrapper.append(

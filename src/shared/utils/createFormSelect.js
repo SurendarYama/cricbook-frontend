@@ -12,7 +12,7 @@ export const createFormSelect = (opts) => {
     const option = options[i];
     const optionNode = document.createElement("option");
     optionNode.classList.add("text-purple-700", "font-bold");
-    option.selected && optionNode.setAttribute("selected", "selected");
+    option.selected && (optionNode.selected = true);
     optionNode.setAttribute("value", option.name);
     optionNode.innerText = option.name;
     formFieldSelect.append(optionNode);

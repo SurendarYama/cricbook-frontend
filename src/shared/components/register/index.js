@@ -93,7 +93,6 @@ export default function register() {
   button.innerHTML = "Register";
 
   agree.addEventListener("click", function (e) {
-    debugger;
     if (this.firstChild.checked) {
       button.disabled = false;
       button.classList.remove("opacity-75", "cursor-not-allowed");
