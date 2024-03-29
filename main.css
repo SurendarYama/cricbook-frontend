@@ -16,7 +16,7 @@
   @apply text-purple-700 text-sm;
 }
 .form-input {
-  @apply w-full h-8 rounded-3xl outline outline-purple-700 placeholder:text-purple-300 border-0 text-purple-700 focus:outline-fuchsia-500;
+  @apply w-full h-8 rounded-3xl outline outline-purple-700 placeholder:text-purple-300 border-0 text-purple-700 focus:ring focus:ring-transparent focus:outline-[3.1px] focus:outline-slate-500;
 }
 
 .form-feild-select {
