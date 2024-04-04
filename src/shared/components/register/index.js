@@ -60,16 +60,22 @@ export default function register() {
     maxLength: 26,
   });
 
-  const options = countryOptions.map((option, index) => {
+  const options = countryOptions.map((option) => {
     option.name === "India"
       ? (option.selected = true)
       : (option.selected = false);
     return option;
   });
+
+  const selected = countryOptions.filter(
+    (option) => option.name === "India" && option
+  )[0];
+
   const country = createFormSelect({
     labelName: "Country*",
     options,
     name: "country",
+    selected,
   });
 
   const termsAndConditions = createAgree({
