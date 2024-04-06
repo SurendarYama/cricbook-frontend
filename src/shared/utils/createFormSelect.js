@@ -36,9 +36,11 @@ export const createFormSelect = (opts) => {
 
   formFieldSelect.addEventListener("change", () => {
     const selectedValue = document.querySelector(".form-feild-select").value;
-    const selectedCountry = countryOptions
+    let selectedCountry = countryOptions
       .filter((country) => country.name === selectedValue)[0]
       .code.toLowerCase();
+    selectedCountry === "an" && (selectedCountry = "nl");
+    debugger;
     const flagIcons = document.querySelector("#flagIcons");
     flagIcons.className = "size-8 fi";
     flagIcons.classList.add(`fi-${selectedCountry}`);
