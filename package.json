@@ -12,13 +12,13 @@
       "pages/*"
     ],
     "@utils/*": [
-      "@utils/*"
+      "utils/*"
     ],
     "@components/*": [
-      "@components/*"
+      "components/*"
     ],
     "@services/*": [
-      "@services/*"
+      "services/*"
     ]
   },
   "scripts": {
